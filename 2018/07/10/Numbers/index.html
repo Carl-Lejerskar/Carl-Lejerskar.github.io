@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Quick Introduction   Hi! My name is Carl Lejerskar. I am a Statistics enthusiast, and I just recently graduated with a B.S. in Statistics from UCLA. As I go into industry, I hope this website will al">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Law of Large Numbers">
+<meta property="og:url" content="http://Carl-Lejerskar.github.io/2018/07/10/Numbers/index.html">
+<meta property="og:site_name" content="The N Justifies The Mean">
+<meta property="og:description" content="Quick Introduction   Hi! My name is Carl Lejerskar. I am a Statistics enthusiast, and I just recently graduated with a B.S. in Statistics from UCLA. As I go into industry, I hope this website will al">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://carl-lejerskar.github.io/images/ends.jpeg">
+<meta property="og:image" content="http://carl-lejerskar.github.io/images/llnbar.jpeg">
+<meta property="og:image" content="http://carl-lejerskar.github.io/images/xbarline.jpeg">
+<meta property="og:image" content="http://carl-lejerskar.github.io/images/heights.jpeg">
+<meta property="og:image" content="http://carl-lejerskar.github.io/images/Rplot.jpeg">
+<meta property="og:updated_time" content="2018-07-12T02:10:50.454Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Law of Large Numbers">
+<meta name="twitter:description" content="Quick Introduction   Hi! My name is Carl Lejerskar. I am a Statistics enthusiast, and I just recently graduated with a B.S. in Statistics from UCLA. As I go into industry, I hope this website will al">
+<meta name="twitter:image" content="http://carl-lejerskar.github.io/images/ends.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Carl-Lejerskar.github.io/2018/07/10/Numbers/"/>
+
+
+
+
+
+  <title>Law of Large Numbers | The N Justifies The Mean</title>
+  
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+  <style>
+    .site-subtitle {
+      color:white;
+    }
+    .menu-item > a
+    {
+      color: white;
+    }
+  </style>
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader" style="background-image: url('https://cpb-us-e1.wpmucdn.com/blogs.uoregon.edu/dist/1/3928/files/2014/10/log-background-feature-header1-1cbfy1x.jpg');">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">The N Justifies The Mean</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Exploring Data With Statistics</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Carl-Lejerskar.github.io/2018/07/10/Numbers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Carl Lejerskar">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The N Justifies The Mean">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Law of Large Numbers</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T06:05:00-05:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 style="font-size:15px; text-align:center;">
+Quick Introduction
+</h1>
+
+<p>Hi! My name is Carl Lejerskar. I am a Statistics enthusiast, and I just recently graduated with a B.S. in Statistics from UCLA. As I go into industry, I hope this website will allow me to further my passion for Statistics. My goal for this blog is to cover the mathematics behind the concepts that I enjoyed most in college and to have a medium to explain and demonstrate things I learn in the future. Most posts will consist of first a verbal explanation, followed by mathematics, and finally a by-hand implementation using R or Python</p>
+<p>My goal for the near future is to first create a set of posts on explaining and demonstrating the math behind specific methods of regression. I&apos;ll begin with Ordinary Least Squares as a foundation for the linear algebra underlying these methods. This will be followed by Ridge Regression and LASSO, two concepts I enjoyed in college, and I will conclude with their combination: the Elastic Net.</p>
+<p>However this first post addresses a much simpler concept in Statistics highlighted by the name of this site. </p>
+<h1 style="font-size:15px; text-align:center;">
+Some Background
+</h1>
+
+<p>The title of my blog is a pun I heard during my classmate&apos;s graduation speech that is a fun play on words. It refers to a common American idiom, so let us first compare the two:</p>
+<center style="font-size:14px; text-align:center;"> 
+<b>The End Justifies The Means </b>&#xA0;&#xA0; $vs.$ &#xA0;&#xA0; <b>The N Justifies The Mean</b> 
+</center>
+
+<p><br></p>
+<p>The first quote is a common saying used when unfavorable methods are allowed due to their outcome: You contribute to global warming by driving (means), but it gets you to work (end). The means may be immoral, but the end serves as justification. The second quote is a good ol&apos; statistics pun concerned with the <strong>Law of Large Numbers</strong>, where the size of the sample justifies the sample mean serving as an adequate estimator for the population mean.</p>
+<p>The original idiom can be countered by an even more ubiqutious saying &#x201C;Two wrongs do not make a right.&#x201D; Immoral actions may lead to a necessary or even positive results, however the original nature of the actions remain the same.</p>
+<p>A famous American Pragmatist John Dewey corrected the original idiom, and interestingly when rephrased into statistical terms it still rings true:</p>
+<p><img src="/images/ends.jpeg" alt=""></p>
+<p>Rephrased with statistical jargon, the N justifies the mean only when the mean (estimate) used actually brings about the desired and desirable end. The estimate should be an unbiased representation of the population parameter (estimating the desired value), and this population parameter must be the value that actually helps answer the question at hand (the parameter should be desirable).</p>
+<p>Those unfamiliar with statistics jargon, you may be wondering:</p>
+<p>What does N and mean stand for?</p>
+<p>Well first off, N stands for the total number of observations in your sample, where you sample is a set of observations:</p>
+<center>$\left \{X_1,X_2,...X_N\right \}$</center>
+
+<p>A mean, or average, is an arithmetic calculation where one takes the sum of a set of elements divided by the number of elements in the set. In this context mean specifically stands for the average of the observations in the sample, which we will denote by $\bar{X}$: </p>
+<center>$\bar{X} = \frac{\sum_{i=1}^{N}{X_i}}{N}$</center>
+
+<p>But what are we sampling?</p>
+<p>To get a grip on this, we can consider an example. Let&apos;s  say you were trying to figure out what the average height in a city, which we call our <em>population</em>. At a specific moment, the average height is an exact number. You could calculate this value by measuring the height every single person in the city, adding the results, and dividing by the total population of the city. Since this is the average of all possible observations in our population, it is the population mean, denoted by $\mu$.</p>
+<p>But in practice it is very hard to measure every the height single person, it would take a lot of time and resources, let alone other practical constraints. Luckily we can use statistics to obtain a good estimate for this value by getting a random sample of heights the people in the city and and thereafter calculate $\bar{x}$, which can serve as an estimator for $\mu$. </p>
+<p><em>Note: To get an accurate estimate, we need each value in the sample to be independent, meaning measuring the first person cannot affect the measurement of the second person. In theory this means we should put every person measured back into the potential pool of people to measure, however if the sample is less than about 5-10% the size of the population, this requirement can be ignored. For the specifics, look here: <a href="http://www.ma.utexas.edu/users/mks/M358KInstr/TenPctCond.pdf" target="_blank" rel="noopener">link</a></em></p>
+<h1 style="font-size:15px; text-align:center;">
+Example 1
+</h1>
+
+<p>Now that terms are established, let&apos;s  explain this pun and the Law of Large Numbers by further specifying our toy example.</p>
+<p>Let&apos;s  imagine that the city has an average height of exactly 5&apos;8, or 68 inches. This means if you summed up every person&apos;s height, and divided it by the total population, you would end up with a value of exactly 68.</p>
+<p>Thus we must choose a sample size N. How does the size of N affect our estimate? </p>
+<p>We can run a toy simulation to answer this question. The height of a population has been observed to be normally distributed. Thus I will randomly sample from a normal distribution using an R function where I can set $\mu$ to be 68 and I can choose the sample size. Let&apos;s  first use an sample size of 1:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">1</span>)</span><br><span class="line">N &lt;- <span class="number">1</span></span><br><span class="line">sample &lt;- rnorm(N,<span class="number">68</span>,<span class="number">15</span>)</span><br><span class="line">print(sample)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 58.60319</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">est1 &lt;- sum(sample)/length(sample) <span class="comment">#could have also used mean(sample)</span></span><br><span class="line">print(est1)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 58.60319</span><br></pre></td></tr></table></figure>
+<p>Since N=1, $\bar{X}$ is simply the single height obtained as $\frac{\sum_{n=1}^{N}{X}}{N}$ reduces to $X$. We can see that our estimate is wildly off when N is 1, and in this case underestimated the average height by almost 10 inches. Let&apos;s  try an N value of 2 and find a new estimator:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">2</span>)</span><br><span class="line">N &lt;- <span class="number">2</span></span><br><span class="line">sample &lt;- rnorm(N,<span class="number">68</span>,<span class="number">15</span>)</span><br><span class="line">est2 &lt;- sum(sample)/length(sample) </span><br><span class="line">est2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 62.65951</span><br></pre></td></tr></table></figure>
+<p>This estimator is already much closer, only underestimating by about 5. Let&apos;s  try N=5:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">4</span>)</span><br><span class="line">N &lt;- <span class="number">5</span></span><br><span class="line">sample &lt;- rnorm(N,<span class="number">68</span>,<span class="number">15</span>)</span><br><span class="line">est5 &lt;- sum(sample)/length(sample) <span class="comment">#could have also used mean(sample)</span></span><br><span class="line">est5</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 69.44787</span><br></pre></td></tr></table></figure>
+<p>The estimator is even closer, overestimating by about 2.</p>
+<p>Let&apos;s  use a much larger value of N, 100:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">4</span>)</span><br><span class="line">N &lt;- <span class="number">100</span></span><br><span class="line">sample &lt;- rnorm(N,<span class="number">68</span>,<span class="number">15</span>)</span><br><span class="line">est100 &lt;- sum(sample)/length(sample) <span class="comment">#could have also used mean(sample)</span></span><br><span class="line">est100</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 69.44787</span><br></pre></td></tr></table></figure>
+<p>Now we are only off by about half an inch! Let&apos;s  do N=1000!</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">1</span>)</span><br><span class="line">N &lt;- <span class="number">1000</span></span><br><span class="line">sample &lt;- rnorm(N,<span class="number">68</span>,<span class="number">15</span>)</span><br><span class="line">est1000 &lt;- sum(sample)/length(sample) <span class="comment">#could have also used mean(sample)</span></span><br><span class="line">est1000</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 67.82528</span><br></pre></td></tr></table></figure>
+<p>We are getting even closer, with a value off by less than a fifth of an inch!</p>
+<p>Let&apos;s  do 10,000!:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">1</span>)</span><br><span class="line">N &lt;- <span class="number">10000</span></span><br><span class="line">sample &lt;- rnorm(N,<span class="number">68</span>,<span class="number">15</span>)</span><br><span class="line">est10000 &lt;- sum(sample)/length(sample) <span class="comment">#could have also used mean(sample)</span></span><br><span class="line">est10000</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 67.90194</span><br></pre></td></tr></table></figure>
+<p>Wow, we are only off by a tenth of an inch from the true value. Finally let&apos;s  do a sample of 1 million:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set.seed(<span class="number">1</span>)</span><br><span class="line">N &lt;- <span class="number">1000000</span></span><br><span class="line">sample &lt;- rnorm(N,<span class="number">68</span>,<span class="number">15</span>)</span><br><span class="line">est1000000 &lt;- sum(sample)/length(sample) <span class="comment">#could have also used mean(sample)</span></span><br><span class="line">est1000000</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 68.0007</span><br></pre></td></tr></table></figure>
+<p>Finally with an N of one million we are only off by 0.0007, most likely much smaller than the potential measurement error of whichever tool we could be using to measure height. Clearly this is the best estimate yet.</p>
+<p>It seems clear by now that as N has been increasing, the resulting estimate is closer and closer to the true value. I created a barplot below which shows how many percentage points off the estimate was from the true value:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(latex2exp)</span><br><span class="line">estimates &lt;- c(est1,est2,est5,est100,est1000,est10000,est1000000)</span><br><span class="line">valueoff &lt;- (abs(<span class="number">68</span> - estimates))</span><br><span class="line">estimatesdf &lt;- data.frame(x=as.character(c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">100</span>,<span class="number">1000</span>,<span class="number">10000</span>,<span class="number">1000000</span>)), y=valueoff)</span><br><span class="line">ggplot(data=estimatesdf,aes(x=as.character(x), y=valueoff)) +</span><br><span class="line">  geom_bar(stat=<span class="string">&quot;identity&quot;</span>, fill=<span class="string">&quot;steelblue&quot;</span>)+</span><br><span class="line">  ggtitle(TeX(<span class="string">&apos;Absolute Difference Between $\\bar{x}$ and $\\mu$ by Sample Size&apos;</span>) ) +</span><br><span class="line"> xlab(<span class="string">&apos;Sample Size&apos;</span>) +</span><br><span class="line"> ylab(<span class="string">&apos;Absolute Difference (in)&apos;</span>) +</span><br><span class="line"> scale_x_discrete (limits = estimatesdf$x) +</span><br><span class="line"> theme_minimal()</span><br></pre></td></tr></table></figure>
+<p><img src="/images/llnbar.jpeg" alt=""></p>
+<p>As you can see as N increases, the difference decreases, meaning our sample mean gets closer to our population mean. However this visualization is misleading as the difference in sample size between each bar is not equal.</p>
+<p>Let&apos;s  instead plot each value of X-bar for values of N from 1 to 1000:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">xbar &lt;- c()</span><br><span class="line">set.seed(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">1000</span>){</span><br><span class="line">N &lt;- i</span><br><span class="line">sample &lt;- rnorm(N,<span class="number">68</span>,<span class="number">15</span>)</span><br><span class="line">xbari &lt;- sum(sample)/length(sample)</span><br><span class="line">xbar &lt;- c(xbar,xbari)</span><br><span class="line">}</span><br><span class="line">estimatesdf &lt;- data.frame(x=<span class="number">1</span>:<span class="number">1000</span>, y = xbar)</span><br><span class="line">ggplot(estimatesdf, aes(x, y)) +</span><br><span class="line">  geom_line()+</span><br><span class="line">  geom_point()+</span><br><span class="line">  geom_hline(aes(yintercept=<span class="number">68</span>),colour = <span class="string">&quot;red&quot;</span>, show.legend = <span class="literal">TRUE</span>) +</span><br><span class="line">  xlab(<span class="string">&apos;Sample Size&apos;</span>) +</span><br><span class="line">  ylab(TeX(<span class="string">&apos;$\\bar{x}$  (in)&apos;</span>)) +</span><br><span class="line">  ggtitle(<span class="string">&apos;Sample Mean of Heights for Sample Sizes 1 to 1000&apos;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/xbarline.jpeg" alt=""></p>
+<p>The same conclusion can be drawn here. The values are wildly off from the true value $\mu$ (red line) when N is low. As N increases, our estimator $\bar{x}$ settles around what we are trying to estimate.</p>
+<p>We have observed the <strong>Law of Large Numbers</strong>! Before this law is formally stated, let&apos;s first we must understand two characters of both our data and our estimator $\bar{X}$: variance and expected value. Thereafter we must state Chebyshev&apos;s Inequality.</p>
+<h1 style="font-size:15px; text-align:center;">
+Expected Value and Variance
+</h1>
+
+<h2 style="font-size:15px; text-align:center;">
+The Data
+</h2>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x &lt;- seq(<span class="number">10</span>, <span class="number">130</span>, length=<span class="number">1000</span>)</span><br><span class="line">y &lt;- dnorm(x, mean=<span class="number">68</span>, sd=<span class="number">15</span>)</span><br><span class="line">plot(x,y,main =<span class="string">&apos;Probability Distribution of Heights&apos;</span>, xlab=<span class="string">&apos;Heights&apos;</span>, ylab = <span class="string">&apos;Probability&apos;</span>)</span><br><span class="line">abline(v=<span class="number">68</span>, col=<span class="string">&apos;red&apos;</span>)</span><br><span class="line">abline(v=<span class="number">68</span>+<span class="number">15</span>, col=<span class="string">&apos;blue&apos;</span>)</span><br><span class="line">abline(v=<span class="number">68</span>-<span class="number">15</span>, col=<span class="string">&apos;blue&apos;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/heights.jpeg" alt=""><br>Above we can see the probability distribution for the heights of our city, which tells you the probability of any height on the X axis. This probability distribution follows a normal distribution, which has an average height $\mu = 68$ denoted by the red line, and a standard deviation, or $\sigma$ of 15 which I arbitrarily set in the beginning of the example. The blue lines mark one standard deviation above and below the mean. Standard deviation is related to variance, which we will get to later.</p>
+<p>Now what is expected value?</p>
+<p>Consider a single, future potential measurement, without any knowledge about the specific person, only that they come from the city&apos;s population. This measurement can be seen as a <em>random variable</em>: The person may be much taller than average, or much shorter, however we have no way to tell. We do know, however, that it is very unlikely that they are the tallest person, or the shortest person. Most people, in fact, are around the average height, with 68% being between 53 and 83 inches (68 $\pm$ 1*15). Thus it makes sense  their height to be $\mu$ with the little information we have available. </p>
+<p>This is called the <em>expected value</em> of $X$, denoted by $\mathbf{E}[X]$ which equals $\mu$. </p>
+<p>More formally: For a discrete distribution, if you take the average of each possible value in the distribution, and multiply them by their respective probability (the chance of that height as shown in the graph), you get the expected value.<br><br></p>
+<center>
+$\mathbf{E}[X] = \frac{\sum_{i=1}^{N}{X_iP(X_i)}}{N}$
+</center>
+
+<p>The distribution we are using, however, is continuous. A person can have a height with any value, such as 68.32 inches or 64.56 inches, not just 68 or 64 inches. Also, each tail of the probability distribution technically continues to positive and negative infinity with infinitesimally small probablities. How do we handle this? Use an integral! </p>
+<center>
+$\mathbf{E}[X] = \int\limits_{-\infty}^{+\infty}XP(X)dx$
+</center>
+
+<p><br></p>
+<p>Wait, what is the difference between the term &apos;mean&apos; and the term &apos;expected value&apos;?</p>
+<p>Well when describing a set of data, we use the term mean as we can perform the arithmetic of summing the values and dividing by their number. However when predicting the most likely value for a random variable, such as the very next measurement $X_i$ when drawing a sample from the city, we use the term expected value. The mean is a computation, the expected value is a property of the distribution that the random variable is drawn from.</p>
+<p>Now how does this help understand variance? Well if you wanted to understand how the data is spread, you would need to measure the difference between each value and the mean: $\left(X-\mu\right)$. However it doesn&apos;t matter if the difference is positive or negative, both show a deviation from the mean, so we square the quantiy: $\left(X-\mu\right)^2$. Now how do we determine a specific value that can describe the shape/spread of the distribution? We take the expectation!</p>
+<center>
+$\mathbf{E}[\left(X-\mu\right)^2] = \mathrm{Var}\left ({X}\right ) = \sigma^2$
+</center>
+
+<h2 style="font-size:15px; text-align:center;">
+Our Estimator
+</h2>
+
+<p>Now how do we apply this? Well we can try to figure out the expected value of our estimator $\bar{X}$:</p>
+<p>$\mathbf{E}[\bar{X}] = \mathbf{E}[\frac{\sum_{i=1}^{N}{X_i}}{N}]$ <br></p>
+<p>$\mathbf{E}[\bar{X}] = \frac{1}{N}\mathbf{E}[\sum_{i=1}^{N}{X_i}]$ <br></p>
+<p>$\mathbf{E}[\bar{X}] = \frac{1}{N}\sum_{i=1}^{N}{\mathbf{E}[X_i]}$ <br></p>
+<p>$\mathbf{E}[\bar{X}] = \frac{1}{N}\sum_{i=1}^{N}{\mu}$ <br></p>
+<p>$\mathbf{E}[\bar{X}] = \frac{1}{N}N\mu$ <br></p>
+<p>$\mathbf{E}[\bar{X}] = \mu$ <br></p>
+<p>Wow! The expected value of our estimator is equal to the parameter it is estimating! This means our estimator is <em>unbiased</em>, meaning we have an accurate estimate for our parameter.</p>
+<p>What is the variance of $\bar{X}$?</p>
+<center>
+$\mathrm{Var}{\bar{X}} = \mathrm{Var}\left({\frac{\sum_{i=1}^{N}{X_i}}{N}}\right )$ <br>
+$\mathrm{Var}{\bar{X}} = \frac{1}{N^2}\mathrm{Var}\left ({\sum_{i=1}^{N}{X_i}}\right )$ <br> 
+$\mathrm{Var}{\bar{X}} = \frac{1}{N^2}\sum_{i=1}^{N}{\mathrm{Var}\left ({X_i}\right )}$ <br> 
+$\mathrm{Var}{\bar{X}} = \frac{1}{N^2}\sum_{i=1}^{N}{\sigma^2}$ <br> 
+$\mathrm{Var}{\bar{X}} = \frac{1}{N^2}N\sigma^2$ <br> 
+$\mathrm{Var}{\bar{X}} = \frac{\sigma^2}{N}$ <br> 
+</center>
+
+<p>So the variance of $\bar{X}$ is simply the variance of $X$ divided by $N$!</p>
+<h2 style="font-size:15px; text-align:center;">
+Chebyshev&apos;s Inequality
+</h2>
+
+<center>
+$P(abs{X-\mu} \geq k) \leq \frac{\mathrm{Var}\left ({X}\right )}{k^2}$
+</center>
+
+<p>What does this tell us? If you look at the equation, K increases, the right side gets smaller as $\mathrm{Var}{X}$ is constant. Thus the probability that the absolute value of the difference between a random variable $X$ and $\mu$ is greater than K decreases as K increases. Or put more simply, the chance that the next measurement deviates from the mean by K decreases as K increases. This makes sense in the context of our example as the taller or shorter the person potentially is, the less likely we will sample them.</p>
+<h1 style="font-size:15px; text-align:center;">
+Law of Large Numbers (Weak)
+</h1>
+
+<p>To derive the law of large numbers we will apply Chebyshev&apos;s inequality to $\bar{X}$. </p>
+<p>Note that $X = \bar{X}$ and thus $\mathrm{Var}{X}$ in the equation to $\mathrm{Var}{\bar{X}}$ which equals $\frac{\sigma^2}{N}$.</p>
+<center>
+$P(\mid{\bar{X}-\mu}\mid  \geq k) \leq \frac{\mathrm{Var} \left(\bar{X} \right)}{k^2}$ <br>
+$P(\mid{\bar{X}-\mu}\mid  \geq k) \leq \frac{\sigma^2}{Nk^2}$
+</center>
+
+<p>Now what should be set K to equal?<br>Well, since we want the difference to be as small as possible, we will set $k = \epsilon$, an extremely small positive constant.</p>
+<center>
+$P(\mid{\bar{X}-\mu}\mid  \geq \epsilon) \leq \frac{\sigma}{N\epsilon^2}$
+</center>
+Now how does N effect this relationship? As N increases, the right side decreases shrinking the probability on the left. This means as N increases, the chance that the difference between a random variable and $\mu$ is larger than $\epsilon$  decreases. What if we push N to infinity?
+
+<center>
+$P(\mid{\bar{X}-\mu}\mid  \geq \epsilon) \leq \lim\limits_{N \to \infty}\frac{\sigma}{N\epsilon^2}$ <br>
+$P(\mid{\bar{X}-\mu}\mid  \geq \epsilon)  = 0$ 
+</center>
+
+<p>And this is the Law of Large Numbers! It essentially tells us that $\bar{x} \rightarrow{P} \mu$ as $N \rightarrow \infty$. This is the <strong>Weak</strong> Law of Large Numbers, as it only states the probability that $\bar{x}$ is within the range of $\mu \pm \epsilon$ is 1 when  $N$ approaches $\infty$. </p>
+<h1 style="font-size:15px; text-align:center;">
+Law of Large Numbers (Strong)
+</h1>
+The **Strong** Law of Large Numbers states that:
+<center>
+$P(\lim\limits_{N \to \infty}bar{X}=mu) = 1$
+</center>
+There are distributions where this does not hold, and it states as ${N \rightarrow \infty$ $\bar{X}$ converges almost surely to $\mu$, or rather the probability that they are equal is 1. &apos;Almost surely&apos; loosely means that any event where it does not converge has a probability of 0. This requires a much longer proof and there are more cases where it does not hold.
+
+<h1 style="font-size:15px; text-align:center;">
+Finite Populations
+</h1>
+
+<p>Now, in our example it might seem silly to consider a sample of size infinity, as N has a max value: the population of the city. We might as well take a sample of size N without replacement, as there is no need for the <strong>Law of Large Numbers</strong>, as the resulting $\bar{X}$ is equal to the population of the city. In this case we are directly calculating $\mu$, measuring every person. However the <strong>Law of Large Numbers</strong> still remains true with a finite population. How can we take a sample larger than the population? Notice that in the case without replacement, if you measure person A, on the next draw, there is no chance you will measure person A as he is no longer in the pool. The draws are no longer independent as one draw effects the outcomes of the next draw. This effect is negligible when the population is much larger than the sample, but if you are taking very large samples this cannot be ignored. Thus you must take the sample with replacement: Measure a person, and then place them back in the pool of persons to be measured. Now as the size of the sample approaches infinity, it will approach the value that is calculated directly. Yes, you might as well directly measure $\mu$, but the Law of Large Numbers still applies to a finite population.</p>
+<p>Are there non-finite populations?</p>
+<p>Well what if we were instead trying to estimate the probablity of heads for a fair coin. From experience we know it is 50 percent, however there is no limit to coin flips like there is for people in our first example. For a sample of size N, the proportion of heads is $\hat{p}$ which estimates the true probability of heads $P$. I will quickly simulate this and generate the analogous graph:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">heads &lt;- c()</span><br><span class="line">set.seed(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">1000</span>){</span><br><span class="line">N &lt;- i</span><br><span class="line">sample &lt;- sample(c(<span class="literal">TRUE</span>,<span class="literal">FALSE</span>), size=N, prob=c(<span class="number">0.50</span>,<span class="number">0.50</span>),replace=<span class="literal">TRUE</span>)</span><br><span class="line">heads &lt;- c(heads,sum(sample)/length(sample))</span><br><span class="line">}</span><br><span class="line">estimatesdf &lt;- data.frame(x=<span class="number">1</span>:<span class="number">1000</span>, y = heads)</span><br><span class="line">ggplot(estimatesdf, aes(x, y)) +</span><br><span class="line">  geom_line()+</span><br><span class="line">  geom_point()+</span><br><span class="line">  geom_hline(aes(yintercept=<span class="number">0.50</span>),colour = <span class="string">&quot;red&quot;</span>, show.legend = <span class="literal">TRUE</span>) +</span><br><span class="line">  xlab(<span class="string">&apos;Sample Size&apos;</span>) +</span><br><span class="line">  ylab(TeX(<span class="string">&apos;$\\bar{x}$&apos;</span>))+</span><br><span class="line">  ggtitle(<span class="string">&apos;Sample Proportion of Heads for Sample Sizes 1 to 1000&apos;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/Rplot.jpeg" alt=""></p>
+<p>Here we can see that the graph looks similar to our graph concerning heights: extremely low values of N yield very innacurate estimates, and as N increases the estimates approach the true probability 0.5 (red). The </p>
+<p>$\hat{p} \rightarrow p$ as $N \rightarrow \infty$ </p>
+<p>And here it makes a bit more intuitive sense to use infinity. We could keep flipping coins and making a larger, finite sample only to get closer and closer to 0.50, but never quite there. Let&apos;s  do 1,000,000 tosses:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">N &lt;- <span class="number">1000000</span></span><br><span class="line">sample &lt;- sample(c(<span class="literal">TRUE</span>,<span class="literal">FALSE</span>), size=N, prob=c(<span class="number">0.50</span>,<span class="number">0.50</span>),replace=<span class="literal">TRUE</span>)</span><br><span class="line">millheads &lt;- sum(sample)/length(sample)</span><br><span class="line">millheads</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 0.500145</span><br></pre></td></tr></table></figure>
+<p>Our estimate is still off by over 0.0001! How about 100 million tosses?</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">N &lt;- <span class="number">100000000</span></span><br><span class="line">sample &lt;- sample(c(<span class="literal">TRUE</span>,<span class="literal">FALSE</span>), size=N, prob=c(<span class="number">0.50</span>,<span class="number">0.50</span>),replace=<span class="literal">TRUE</span>)</span><br><span class="line">millheads &lt;- sum(sample)/length(sample)</span><br><span class="line">millheads</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 0.5000221</span><br></pre></td></tr></table></figure>
+<p>We are still off by over 0.00002! We are extraordinarly close to 0.5, but only when the limit is taken as $N \rightarrow \infty$ will $\bar{X} \rightarrow{P} \mu$</p>
+<p></p><h1 style="font-size:15px; text-align:center;">
+Conclusion
+</h1><br>What is the point of the Law of Large Numbers?<p></p>
+<p>It is what allows us to have confidence in the results of our sampling. In the two toy examples we knew what the $\mu$ was, and used that information set up each simulation. In practice we have no idea what $\mu$ is, and thus we obtain a sample and calculate $\bar{x}$ to estimate $\mu$. For example if you were tasked to figure out the proportion of republicans to democrats in a specific county, so if you correctly take a large enough sample and record Republican or Democrat, the Law of Large Numbers says the ratio you observe will be representative of the ratio of the overall county. Restated, the <em>Law of Large Numbers</em> assures us that if our sample is sufficiently large and our observations are independent, our estimate will be representative of $\mu$, or rather <strong>the N justifies the mean</strong>! </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Carl Lejerskar</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/carl-lejerskar" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">
+Quick Introduction
+</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">
+Some Background
+</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">
+Example 1
+</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">
+Expected Value and Variance
+</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">
+The Data
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">
+Our Estimator
+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.</span> <span class="nav-text">
+Chebyshev&#39;s Inequality
+</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">
+Law of Large Numbers (Weak)
+</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">
+Law of Large Numbers (Strong)
+</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">
+Finite Populations
+</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">
+Conclusion
+</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Carl Lejerskar</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
