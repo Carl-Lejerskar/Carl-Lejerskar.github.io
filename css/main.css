@@ -1823,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffd440;
+  background: #e4ff82;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2662,7 +2662,7 @@ embed {
   display: inline-block;
 }
 .site-subtitle {
-  color: #fff;
+  color: #222;
   font-size: 18px;
 }
 .menu a {
